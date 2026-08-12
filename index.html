@@ -15,6 +15,13 @@
 </head>
 <body>
 
+    <!-- Route Protection -->
+    <script>
+        if (!localStorage.getItem("token")) {
+            window.location.href = "login.html";
+        }
+    </script>
+
     <div class="dashboard-container">
         <!-- Sidebar Navigation -->
         <aside class="sidebar glass-panel">
@@ -41,7 +48,7 @@
                 <a href="#" class="nav-item">
                     <i class="fa-solid fa-gear"></i> Settings
                 </a>
-                <a href="#" class="nav-item logout">
+                <a href="#" id="logout-btn" class="nav-item logout">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
                 </a>
             </nav>
@@ -113,18 +120,76 @@
 
                 <!-- Placeholders for other sections -->
                 <section id="skills-section" class="content-section">
-                    <h2>Skills Module (Coming in Phase 4)</h2>
-                </section>
-                <section id="about-section" class="content-section">
-                    <h2>About Module (Coming in Phase 5)</h2>
-                </section>
-                <section id="contact-section" class="content-section">
-                    <h2>Contact Module (Coming in Phase 6)</h2>
+
+                    <div class="section-header">
+                        <h2>Manage Skills</h2>
+
+                        <button class="btn btn-primary" onclick="openSkillModal()">
+                            <i class="fa-solid fa-plus"></i> Add Skill
+                        </button>
+                    </div>
+
+                    <div class="projects-grid" id="skills-grid">
+
+                        <div class="loading-state">
+                            Loading skills...
+                        </div>
+
+                    </div>
+
                 </section>
 
-            </div>
-        </main>
-    </div>
+
+                <section id="about-section" class="content-section">
+
+                    <div class="section-header">
+
+                        <h2>Manage About</h2>
+
+                        <button class="btn btn-primary" onclick="openAboutModal()">
+
+                            <i class="fa-solid fa-pen"></i>
+
+                            Edit About
+
+                        </button>
+
+                    </div>
+
+                    <div id="about-card" class="glass-panel" style="padding:30px;">
+
+                        <div class="loading-state">
+
+                            Loading About...
+
+                        </div>
+
+                    </div>
+
+                </section>
+                                <section id="contact-section" class="content-section">
+
+                            <div class="section-header">
+
+                                <h2>Contact Messages</h2>
+
+                            </div>
+
+                            <div id="messages-grid" class="projects-grid">
+
+                                <div class="loading-state">
+
+                                    Loading Messages...
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                            </div>
+                        </main>
+                    </div>
 
     <!-- Project Modal (Add/Edit) -->
     <div id="project-modal" class="modal-overlay">
@@ -142,10 +207,17 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="project-category">Category</label>
-                    <input type="text" id="project-category" required class="glass-input">
-                </div>
+                <label for="project-category">Category</label>
 
+                    <select id="project-category" class="glass-input" required>
+                        <option value="">Select Category</option>
+                        <option value="Frontend">Frontend</option>
+                        <option value="Backend">Backend</option>
+                        <option value="Full Stack">Full Stack</option>
+                        <option value="Mobile">Mobile</option>
+                        <option value="AI/ML">AI/ML</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="project-tech">Technologies (comma separated)</label>
                     <input type="text" id="project-tech" required class="glass-input">
@@ -179,6 +251,151 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+  
+    <!-- Skill Modal -->
+<div id="skill-modal" class="modal-overlay">
+    <div class="modal-content glass-panel">
+
+        <div class="modal-header">
+            <h2 id="skill-modal-title">Add Skill</h2>
+
+            <button class="close-btn" onclick="closeSkillModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <form id="skill-form">
+
+            <input type="hidden" id="skill-id">
+
+            <div class="form-group">
+                <label>Skill Name</label>
+                <input
+                    type="text"
+                    id="skill-name"
+                    class="glass-input"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+
+                <select
+                    id="skill-category"
+                    class="glass-input"
+                    required>
+
+                    <option value="Frontend">Frontend</option>
+                    <option value="Backend">Backend</option>
+                    <option value="Database">Database</option>
+                    <option value="Programming">Programming</option>
+                    <option value="Tools">Tools</option>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Skill Level (0-100)</label>
+
+                <input
+                    type="number"
+                    id="skill-level"
+                    class="glass-input"
+                    min="0"
+                    max="100"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label>FontAwesome Icon</label>
+
+                <input
+                    type="text"
+                    id="skill-icon"
+                    class="glass-input"
+                    placeholder="fab fa-react"
+                    required>
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="closeSkillModal()">
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+                    Save Skill
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<!-- About Modal -->
+<div id="about-modal" class="modal-overlay">
+
+    <div class="modal-content glass-panel">
+
+        <div class="modal-header">
+
+            <h2>Edit About</h2>
+
+            <button class="close-btn" onclick="closeAboutModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+        <form id="about-form">
+
+            <div class="form-group">
+
+                <label>Bio</label>
+
+                <textarea
+                    id="about-bio"
+                    rows="8"
+                    class="glass-input"
+                    required></textarea>
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="closeAboutModal()">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    Save
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>

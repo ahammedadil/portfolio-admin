@@ -1,4 +1,4 @@
-const API_URL = 'https://portfolio-backend-qcjm.onrender.com/api/auth/login'; // Same as script.js
+const API_URL = 'https://portfolio-backend-qcjm.onrender.com'; // Same as script.js
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setLoading(true);
 
         try {
-            const response = await fetch(`${API_URL}/auth/login`, {
+            const response = await fetch(`${API_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

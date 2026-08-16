@@ -131,7 +131,7 @@ async function fetchProjects() {
     grid.innerHTML = '<div class="loading-state">Loading projects...</div>';
 
     try {
-        const response = await fetch(`${API_URL}/projects`);
+        const response = await fetch(`${API_URL}/api/projects`);
         if (!response.ok) {
             // Throw error if not 200, but for local dev if backend is offline, we'll show dummy data or error
             throw new Error('Network response was not ok');
@@ -249,7 +249,7 @@ projectForm.addEventListener('submit', async (e) => {
         let response;
         if (id) {
             // Edit
-            response = await fetch(`${API_URL}/projects/${id}`, {
+            response = await fetch(`${API_URL}/api/projects/${id}`, {
                 method: 'PUT',
                 headers: {
                         "Content-Type": "application/json",
@@ -259,7 +259,7 @@ projectForm.addEventListener('submit', async (e) => {
             });
         } else {
             // Add
-            response = await fetch(`${API_URL}/projects`, {
+            response = await fetch(`${API_URL}/api/projects`, {
                 method: 'POST',
                 headers: {
                         "Content-Type": "application/json",
@@ -295,7 +295,7 @@ projectForm.addEventListener('submit', async (e) => {
 async function deleteProject(id) {
     if (confirm('Are you sure you want to delete this project?')) {
         try {
-            const response = await fetch(`${API_URL}/projects/${id}`, {
+            const response = await fetch(`${API_URL}api/projects/${id}`, {
                 method: 'DELETE',
                 headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -335,7 +335,7 @@ async function fetchSkills() {
 
     try {
 
-        const response = await fetch(`${API_URL}/skills`);
+        const response = await fetch(`${API_URL}/api/skills`);
 
         skillsData = await response.json();
 
@@ -448,7 +448,7 @@ skillForm.addEventListener("submit", async (e) => {
 
         if (id) {
 
-            response = await fetch(`${API_URL}/skills/${id}`, {
+            response = await fetch(`${API_URL}/api/skills/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -459,7 +459,7 @@ skillForm.addEventListener("submit", async (e) => {
 
         } else {
 
-            response = await fetch(`${API_URL}/skills`, {
+            response = await fetch(`${API_URL}/api/skills`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -516,7 +516,7 @@ async function deleteSkill(id) {
 
     try {
 
-        const response = await fetch(`${API_URL}/skills/${id}`, {
+        const response = await fetch(`${API_URL}api/skills/${id}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -567,7 +567,7 @@ async function fetchAbout() {
 
     try {
 
-        const response = await fetch(`${API_URL}/about`);
+        const response = await fetch(`${API_URL}/api/about`);
 
         aboutData = await response.json();
 
@@ -623,7 +623,7 @@ aboutForm.addEventListener("submit", async (e) => {
 
         const response = await fetch(
 
-            `${API_URL}/about/${aboutData._id}`,
+            `${API_URL}/api/about/${aboutData._id}`,
 
             {
                 method: "PUT",
@@ -677,7 +677,7 @@ async function fetchMessages() {
 
     try {
 
-        const response = await fetch(`${API_URL}/contact`);
+        const response = await fetch(`${API_URL}/api/contact`);
 
         messagesData = await response.json();
 
@@ -769,7 +769,7 @@ async function markMessageRead(id) {
 
     try {
 
-        const response = await fetch(`${API_URL}/contact/${id}/read`, {
+        const response = await fetch(`${API_URL}/api/contact/${id}/read`, {
 
             method: "PUT",
             headers: {
@@ -802,7 +802,7 @@ async function deleteMessage(id) {
 
     try {
 
-        const response = await fetch(`${API_URL}/contact/${id}`, {
+        const response = await fetch(`${API_URL}/api/contact/${id}`, {
 
             method: "DELETE",
             headers: {

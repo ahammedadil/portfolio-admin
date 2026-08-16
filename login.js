@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api'; // Same as script.js
+const API_URL = 'https://portfolio-backend-qcjm.onrender.com/api/auth/login'; // Same as script.js
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');

@@ -35,7 +35,7 @@ if (!token) {
 
 }
 
-const API_URL = 'http://localhost:5000/api'; // Change this to your backend URL when deployed
+const API_URL = 'https://portfolio-backend-qcjm.onrender.com'; // Change this to your backend URL when deployed
 
 // Auth Check (Double check in JS)
 

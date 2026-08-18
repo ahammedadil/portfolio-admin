@@ -295,7 +295,7 @@ projectForm.addEventListener('submit', async (e) => {
 async function deleteProject(id) {
     if (confirm('Are you sure you want to delete this project?')) {
         try {
-            const response = await fetch(`${API_URL}api/projects/${id}`, {
+            const response = await fetch(`${API_URL}/api/projects/${id}`, {
                 method: 'DELETE',
                 headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -516,7 +516,7 @@ async function deleteSkill(id) {
 
     try {
 
-        const response = await fetch(`${API_URL}api/skills/${id}`, {
+        const response = await fetch(`${API_URL}/api/skills/${id}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
